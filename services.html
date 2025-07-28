@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enhanced Travel Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    .services-section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .services-section h2 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      color: #1f2937;
+    }
+
+    .services-section p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 50px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      position: relative;
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px 20px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+    }
+
+    .icon svg {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 15px;
+    }
+
+    .service-card h3 {
+      font-size: 1.3rem;
+      color: #1f2937;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: #ff4e4e;
+    }
+
+    /* Colors per card background */
+    .card-airport    { background: linear-gradient(135deg, #fff0f3, #ffe1e9); }
+    .card-hotels     { background: linear-gradient(135deg, #f0fff3, #d2ffe8); }
+    .card-honeymoon  { background: linear-gradient(135deg, #fff0f5, #fcd6f5); }
+    .card-wedding    { background: linear-gradient(135deg, #f0f5ff, #d6e4ff); }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  animation: fadeIn 0.3s ease-in-out;
+  position: relative;
+}
+
+.modal .close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #555;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.95);}
+  to {opacity: 1; transform: scale(1);}
+}
+.testimonial-carousel, .testimonial-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.testimonial {
+  width: 280px;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+  </style>
+</head>
+<body>
+
+<section class="services-section">
+  <h2>Our Travel Services</h2>
+  <p>Making your dream journeys stress-free, luxurious, and unforgettable.</p>
+  <div class="services-grid">
+
+    <div class="service-card card-airport" data-aos="fade-up">
+      <div class="icon">
+        <svg fill="#ff6b6b" viewBox="0 0 24 24"><path d="M2.01 21l20.99-9L2.01 3 2 10l15 2-15 2z"/></svg>
+      </div>
+      <h3>Nearest Airport Assistance</h3>
+      <p>We guide you to the best nearby airports. (Flight fare is covered by you.)</p>
+      <a href="#modal-airport" class="btn open-modal">Learn More</a>
+    </div>
+
+    <div class="service-card card-hotels" data-aos="fade-up" data-aos-delay="100">
+      <div class="icon">
+        <svg fill="#38b000" viewBox="0 0 24 24"><path d="M4 10V6a2 2 0 012-2h12a2 2 0 012 2v4h2v11h-2v-2H4v2H2V10h2zm2 0h12V6H6v4zm0 2v5h12v-5H6z"/></svg>
+      </div>
+      <h3>Hotel Booking</h3>
+      <p>Luxurious or budget stays — we’ve got you covered wherever you land.</p>
+      <a href="#modal-hotel" class="btn open-modal">Explore Hotels</a>
+    </div>
+
+    <div class="service-card card-honeymoon" data-aos="fade-up" data-aos-delay="200">
+      <div class="icon">
+        <svg fill="#d63384" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-2.5 2-4.5 4.5-4.5C9 4 10.5 5.5 12 7.5c1.5-2 3-3.5 5.5-3.5 2.5 0 4.5 2 4.5 4.5 0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </div>
+      <h3>Honeymoon Packages</h3>
+      <p>Romantic escapes crafted for couples to cherish lifelong memories.</p>
+      <a href="#modal-honeymoon" class="btn open-modal">View Packages</a>
+    </div>
+
+    <div class="service-card card-wedding" data-aos="fade-up" data-aos-delay="400">
+      <div class="icon">
+        <svg fill="#3b82f6" viewBox="0 0 24 24"><path d="M12 7.77L18.39 21H5.61L12 7.77M12 2L1 21h22"/></svg>
+      </div>
+      <h3>Destination Weddings</h3>
+      <p>Plan the wedding of your dreams in paradise — we handle the rest.</p>
+      <a href="#modal-wedding" class="btn open-modal">Start Planning</a>
+    </div>
+
+  </div>
+
+
+  </div>
+</section>
+<!-- ✈️ Nearest Airport Assistance Modal -->
+<div id="modal-airport" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Real Story: Hassle-Free Arrival in Tokyo</h2>
+    <p>Ravi and Priya landed in Tokyo for their first trip to Japan. With our nearest airport guidance, they reached their hotel in Shinjuku within 45 minutes using the fastest route we provided. No stress, no confusion — just a smooth start to their vacation.</p>
+  </div>
+</div>
+
+<!-- 🏨 Hotel Booking Modal -->
+<div id="modal-hotel" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Real Story: Budget Bliss in Bali</h2>
+    <p>Ananya wanted a relaxing beach escape without breaking the bank. We found her a cozy beachfront villa in Bali with breakfast included, spa discounts, and sunset views — all under her budget. It became her favorite solo trip ever.</p>
+  </div>
+</div>
+
+<!-- 💕 Honeymoon Packages Modal -->
+<div id="modal-honeymoon" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Real Story: Honeymoon in Santorini</h2>
+    <p>Amit and Rhea’s honeymoon was straight out of a fairy tale. Private infinity pool, candlelit cliffside dinner, and a sunset yacht tour around Santorini — all carefully planned by our team to make their first week as newlyweds unforgettable.</p>
+  </div>
+</div>
+
+<!-- 💍 Destination Weddings Modal -->
+<div id="modal-wedding" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Real Story: A Parisian Dream Wedding</h2>
+    <p>Elena and Marc got married beneath the Eiffel Tower, followed by a candlelit dinner cruise on the Seine. From paperwork to photographers and flowers — we handled it all, so they could focus on love and memories.</p>
+  </div>
+</div>
+<div class="testimonial-grid">
+  <div class="testimonial">
+    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Rhea" />
+    <p>"Best honeymoon ever! Everything was so well planned. We didn’t have to worry about a single thing."</p>
+    <h4>— Rhea Malhotra</h4>
+    <div class="stars">★★★★★</div>
+  </div>
+
+  <div class="testimonial">
+    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Marc" />
+    <p>"Our destination wedding in Paris was a dream. The team handled everything so professionally!"</p>
+    <h4>— Marc Legrand</h4>
+    <div class="stars">★★★★★</div>
+  </div>
+
+  <div class="testimonial">
+    <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Ananya" />
+    <p>"I found the perfect beach resort in Bali thanks to them. Amazing customer support!"</p>
+    <h4>— Ananya Rao</h4>
+    <div class="stars">★★★★☆</div>
+  </div>
+</div>
+
+  </div>
+</section>
+<!-- Airport Assistance Modal -->
+<div id="modal-airport" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Real Story: Hassle-Free Arrival in Tokyo</h2>
+    <p>Ravi and Priya landed in Tokyo...</p>
+    <div class="video-wrapper" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; margin-top:20px;">
+      <iframe id="airportVideo" src="https://www.youtube.com/embed/AIRPORT_VIDEO_ID?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+    once: true,
+  });
+</script>
+<script>
+  document.querySelectorAll('.open-modal').forEach(button => {
+    button.addEventListener('click', e => {
+      e.preventDefault();
+      const target = button.getAttribute('href');
+      document.querySelector(target).style.display = 'block';
+    });
+  });
+
+  document.querySelectorAll('.modal .close').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.modal').style.display = 'none';
+    });
+  });
+
+  window.addEventListener('click', e => {
+    if (e.target.classList.contains('modal')) {
+      e.target.style.display = 'none';
+    }
+  });
+</script>
+
+
+</body>
+</html>
+
+
